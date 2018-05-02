@@ -1,0 +1,170 @@
+{
+  "kind": "books#volumes",
+  "totalItems": 599,
+  "items": [
+    {
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/Rl-F95_f0GoC",
+      "volumeInfo": {
+          "title": "COMPUTER PROGRAMMING IN C",
+          "authors": [
+            "V. RAJARAMAN"
+          ],
+          "publisher": "PHI Learning Pvt. Ltd.",
+          "publishedDate": "1994-01-01",
+          "description": "This book introduces computer programming to a beginner using the programming language C. The version of C used is the one standardised by the American National Standards Institute (ANSI C). C has rapidly gained users due to its efficiency, rich data structure, variety of operators and affinity to UNIX operating system. C is a difficult language to learn if it is not methodically approached. Our attempt has been to introduce the basic aspects of C to enable the student to quickly start writing C programs and postpone more difficult features of C to later chapters. The methodology of presentation closely follows the one used by the author in his popular book on PASCAL programming. Those who know PASCAL will find it very easy to learn C using this book.",
+          "pageCount": 372,
+          "printType": "BOOK",
+          "categories": [
+            "Computers"
+          ],
+          "averageRating": 4,
+          "ratingsCount": 4,
+          "contentVersion": "0.1.1.0.preview.1",
+          "imageLinks": {
+            "smallThumbnail": "http://books.google.com/books/content?id=Rl-F95_f0GoC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+            "thumbnail": "http://books.google.com/books/content?id=Rl-F95_f0GoC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+          },
+          "language": "en",
+          "previewLink": "http://books.google.com.br/books?id=Rl-F95_f0GoC&printsec=frontcover&dq=%7Bprogramming%7D&hl=&cd=1&source=gbs_api",
+          "infoLink": "https://play.google.com/store/books/details?id=Rl-F95_f0GoC&source=gbs_api",
+          "canonicalVolumeLink": "https://market.android.com/details?id=book-Rl-F95_f0GoC"
+      },
+      "saleInfo": {
+          "country": "BR",
+          "saleability": "FOR_SALE",
+          "isEbook": true,
+          "listPrice": {
+            "amount": 12.18,
+            "currencyCode": "BRL"
+          },
+          "retailPrice": {
+            "amount": 12.18,
+            "currencyCode": "BRL"
+          },
+          "buyLink": "https://play.google.com/store/books/details?id=Rl-F95_f0GoC&rdid=book-Rl-F95_f0GoC&rdot=1&source=gbs_api"
+      },
+      "accessInfo": {
+          "country": "BR",
+          "viewability": "PARTIAL",
+          "embeddable": true,
+          "publicDomain": false,
+          "textToSpeechPermission": "ALLOWED",
+          "epub": {
+            "isAvailable": false
+          },
+          "pdf": {
+            "isAvailable": true,
+            "acsTokenLink": "http://books.google.com.br/books/download/COMPUTER_PROGRAMMING_IN_C-sample-pdf.acsm?id=Rl-F95_f0GoC&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+          },
+          "webReaderLink": "http://play.google.com/books/reader?id=Rl-F95_f0GoC&hl=&printsec=frontcover&source=gbs_api",
+          "accessViewStatus": "SAMPLE",
+          "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+          "textSnippet": "This book introduces computer programming to a beginner using the programming language C. The version of C used is the one standardised by the American National Standards Institute (ANSI C). C has rapidly gained users due to its efficiency, ..."
+      }
+    },
+
+
+
+
+    {
+      "kind": "books#volume",
+      "id": "jc5-3BArEjQC",
+      "etag": "FBMYbOOjefo",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/jc5-3BArEjQC",
+      "volumeInfo": {
+        "title": "Programming in C",
+        "authors": [
+          "Stephen G. Kochan"
+        ],
+        "publisher": "Sams Publishing",
+        "publishedDate": "2004-07-08",
+        "description": "Learn the C programming language from one of the best. Stephen Kochan's Programming in C is thorough with easy-to-follow instructions that are sure to benefit beginning programmers. This book provides readers with practical examples of how the C programming language can be used with small, fast programs, similar to the programming used by large game developers such as Nintendo. If you want a one-stop-source for C programming, this book is it.The book is appropriate for all introductory-to-intermediate courses on programming in the C language, including courses covering C programming for games and small-device platforms. Programming in C, Third Edition is a thoroughly revised and updated edition of Steven Kochan's classic C programming tutorial: a book that has helped thousands of students master C over the past twenty years. This edition fully reflects the latest C standard and contains current source code. It has been crafted to help students master C regardless of the platform they intend to use or the applications they intend to create -- including small-device and gaming applications, where C's elegance and speed make it especially valuable. Kochan begins with the fundamentals, then covers every facet of C language programming: variables, data types, arithmetic expressions, program looping, making decisions, arrays, functions, structures, character strings, pointers, operations on bits, the preprocessors, I/O, and more. Coverage also includes chapters on working with larger programs; debugging programs; and the fundamentals of object-oriented programming. Appendices include a complete language summary, an introduction to the Standard C Library, coverage of compiling and running programs using gcc, common programming mistakes, and more.",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_13",
+            "identifier": "9780672331411"
+          },
+          {
+            "type": "ISBN_10",
+            "identifier": "0672331411"
+          }
+        ],
+        "readingModes": {
+          "text": true,
+          "image": true
+        },
+        "pageCount": 576,
+        "printType": "BOOK",
+        "categories": [
+          "Computers"
+        ],
+        "averageRating": 5,
+        "ratingsCount": 1,
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": true,
+        "contentVersion": "1.6.3.0.preview.3",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=jc5-3BArEjQC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=jc5-3BArEjQC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.com.br/books?id=jc5-3BArEjQC&printsec=frontcover&dq=%7Bprogramming%7D&hl=&cd=2&source=gbs_api",
+        "infoLink": "https://play.google.com/store/books/details?id=jc5-3BArEjQC&source=gbs_api",
+        "canonicalVolumeLink": "https://market.android.com/details?id=book-jc5-3BArEjQC"
+      },
+      "saleInfo": {
+        "country": "BR",
+        "saleability": "FOR_SALE",
+        "isEbook": true,
+        "listPrice": {
+          "amount": 87.79,
+          "currencyCode": "BRL"
+        },
+        "retailPrice": {
+          "amount": 87.79,
+          "currencyCode": "BRL"
+        },
+        "buyLink": "https://play.google.com/store/books/details?id=jc5-3BArEjQC&rdid=book-jc5-3BArEjQC&rdot=1&source=gbs_api",
+        "offers": [
+          {
+            "finskyOfferType": 1,
+            "listPrice": {
+              "amountInMicros": 87790000,
+              "currencyCode": "BRL"
+            },
+            "retailPrice": {
+              "amountInMicros": 87790000,
+              "currencyCode": "BRL"
+            },
+            "giftable": true
+          }
+        ]
+      },
+      "accessInfo": {
+        "country": "BR",
+        "viewability": "PARTIAL",
+        "embeddable": true,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED_FOR_ACCESSIBILITY",
+        "epub": {
+          "isAvailable": false
+        },
+        "pdf": {
+          "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=jc5-3BArEjQC&hl=&printsec=frontcover&source=gbs_api",
+        "accessViewStatus": "SAMPLE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "This book provides readers with practical examples of how the C programming language can be used with small, fast programs, similar to the programming used by large game developers such as Nintendo."
+      }
+    }
+  ]
+}

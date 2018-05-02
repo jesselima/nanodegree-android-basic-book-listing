@@ -23,7 +23,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     private void goToWelcomeActivity(){
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, BookListActivity.class);
         startActivity(intent);
         finish();
     }

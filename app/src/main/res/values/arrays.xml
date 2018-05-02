@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="settings_order_by_labels">
+        <item>@string/settings_order_by_magnitude_label</item>
+        <item>@string/settings_order_by_most_recent_label</item>
+    </string-array>
+
+    <string-array name="settings_order_by_values">
+        <item>@string/settings_order_by_magnitude_value</item>
+        <item>@string/settings_order_by_most_recent_value</item>
+    </string-array>
+
+    <string-array name="search_suggestions_terms">
+        <item>Node</item>
+        <item>PHP</item>
+        <item>Java</item>
+        <item>Kotlin</item>
+        <item>JavaScript</item>
+        <item>DevOps</item>
+        <item>Front-end</item>
+        <item>Back-end</item>
+        <item>React</item>
+        <item>React Native</item>
+        <item>Angular</item>
+        <item>Vue</item>
+        <item>Git</item>
+        <item>GitHub</item>
+        <item>Technology</item>
+        <item>Programming</item>
+        <item>Cloud</item>
+        <item>Sports</item>
+        <item>Health</item>
+    </string-array>
+</resources>
