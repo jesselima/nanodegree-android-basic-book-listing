@@ -38,7 +38,6 @@
             android:configChanges="orientation|screenSize"
             android:label="Book Details"
             android:parentActivityName=".BookListActivity"/>
-        <activity android:name=".MainActivity" />
 
     </application>
 

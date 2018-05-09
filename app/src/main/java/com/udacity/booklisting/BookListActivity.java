@@ -156,9 +156,7 @@ public class BookListActivity extends AppCompatActivity
         booksAdapter.clear();
     }
 
-
-    // *** NEW SEARCH
-
+    // Search from Action Bar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -172,8 +170,6 @@ public class BookListActivity extends AppCompatActivity
 
         return true;
     }
-
-    //**
     @Override
     protected void onNewIntent(Intent intent) {
 
@@ -183,14 +179,8 @@ public class BookListActivity extends AppCompatActivity
 
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
-            Log.v("Test new search: ", query);
-            //***************
-            //***************
-            //** use the query to search your data somehow
-            //***************
-            //***************
+            Log.v("Search term: ", query);
         }
     }
-    //**
 
 }

@@ -62,8 +62,6 @@ public class BookAdapter extends ArrayAdapter<Book> {
         double listPrice = currentBook.getListPrice();
 
         if(listPrice == 0){
-//            LinearLayout linearLayout = listItemView.findViewById(R.id.book_item_list_layout);
-//            linearLayout.setVisibility(View.GONE);
             mPrice.setText(R.string.free);
             mPrice.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
             mCurrency.setVisibility(View.GONE);

@@ -14,9 +14,9 @@
         android:id="@+id/text_view_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-medium"
-        android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="sans-serif-medium"
         android:maxLines="1"
         android:textAllCaps="false"
         android:textColor="@android:color/black"
@@ -26,8 +26,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="4dp">
+        android:layout_marginBottom="4dp"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -43,9 +43,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="2"
+                    android:text="Authors: "
                     android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:text="Authors: "/>
+                    android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/text_view_authors"
                     android:layout_width="wrap_content"
@@ -63,9 +63,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="2"
+                    android:text="Pages: "
                     android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:text="Pages: "/>
+                    android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/text_view_pages_count"
                     android:layout_width="wrap_content"
@@ -84,18 +84,18 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:maxLines="2"
+                    android:text="Average Rating: "
                     android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:text="Average Rating: "/>
+                    android:textStyle="bold"/>
                 <RatingBar
                     android:id="@+id/rating_bar_view"
                     style="?android:attr/ratingBarStyleSmall"
-                    android:gravity="center"
-                    android:rating="4"
-                    android:stepSize="1"
-                    android:numStars="5"
                     android:layout_width="80dp"
-                    android:layout_height="20dp"/>
+                    android:layout_height="20dp"
+                    android:gravity="center"
+                    android:numStars="5"
+                    android:rating="4"
+                    android:stepSize="1"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -111,9 +111,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="2"
-                android:textStyle="italic"
+                android:text="@string/price"
                 android:textSize="14sp"
-                android:text="@string/price"/>
+                android:textStyle="italic"/>
             <TextView
                 android:id="@+id/text_view_price"
                 android:layout_width="wrap_content"

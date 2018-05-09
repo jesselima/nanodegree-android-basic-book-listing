@@ -2,10 +2,10 @@
 <resources>
 
     <!-- Primary color of the app (shown in the app bar) -->
-    <color name="colorPrimary">#2B3D4D</color>
+    <color name="colorPrimary">#004543</color>
 
     <!-- Primary dark color of the app (shown in the status bar) -->
-    <color name="colorPrimaryDark">#23303D</color>
+    <color name="colorPrimaryDark">#00302f</color>
 
     <!-- Accent color of the app -->
     <color name="colorAccent">#10CAC9</color>
