@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -65,7 +64,7 @@ public class BookAdapter extends ArrayAdapter<Book> {
         if(listPrice == 0){
 //            LinearLayout linearLayout = listItemView.findViewById(R.id.book_item_list_layout);
 //            linearLayout.setVisibility(View.GONE);
-            mPrice.setText(R.string.not_for_sale);
+            mPrice.setText(R.string.free);
             mPrice.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
             mCurrency.setVisibility(View.GONE);
         }else {
@@ -78,9 +77,8 @@ public class BookAdapter extends ArrayAdapter<Book> {
     }
 
     private String formatPrice(double price) {
-        NumberFormat formatter = new DecimalFormat("#0.00");
+        NumberFormat formatter = new DecimalFormat("#0,00");
         return formatter.format(price);
     }
-
 
 }

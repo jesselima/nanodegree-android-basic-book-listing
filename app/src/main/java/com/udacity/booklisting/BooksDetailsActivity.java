@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -39,6 +40,7 @@ public class BooksDetailsActivity extends AppCompatActivity implements LoaderCal
     private static final String REQUEST_URL = "https://www.googleapis.com/books/v1/volumes/";
     private static final int BOOK_LOADER_ID = 2;
     private TextView mEmptyStateTextView;
+    private LinearLayout rootContentLayout;
     Button buttonBuy;
 
     @Override
@@ -51,11 +53,12 @@ public class BooksDetailsActivity extends AppCompatActivity implements LoaderCal
         Bundle bookData = getIntent().getExtras();
         bookDI = bookData.getString("id");
 
+        rootContentLayout = findViewById(R.id.root_content_layout);
         mEmptyStateTextView = findViewById(R.id.empty_view);
 
-        ConnectivityManager connMgr = (ConnectivityManager)
+        ConnectivityManager connectivityManager = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
         if (networkInfo != null && networkInfo.isConnected()) {
             LoaderManager loaderManager = getLoaderManager();
@@ -63,7 +66,9 @@ public class BooksDetailsActivity extends AppCompatActivity implements LoaderCal
         } else {
             View loadingIndicator = findViewById(R.id.loading_indicator);
             loadingIndicator.setVisibility(View.GONE);
-            mEmptyStateTextView.setText(R.string.no_internet_connection);
+            rootContentLayout.setVisibility(View.GONE);
+            mEmptyStateTextView.setVisibility(View.VISIBLE);
+
         }
 
     }
@@ -121,8 +126,8 @@ public class BooksDetailsActivity extends AppCompatActivity implements LoaderCal
         String price = formatPrice(book.getListPrice());
         double listPrice = book.getListPrice();
         if(listPrice == 0){
-            buttonBuy.setText(R.string.unavailable);
-            buttonBuy.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorTextAlert));
+            buttonBuy.setText(R.string.free);
+            buttonBuy.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.textWhite));
             if(book.getMbuyLink().isEmpty()){
                 buttonBuy.setEnabled(false);
                 buttonBuy.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.transparent));

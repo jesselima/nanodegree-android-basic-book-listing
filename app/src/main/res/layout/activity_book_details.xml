@@ -20,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
+            android:id="@+id/root_content_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -256,7 +257,16 @@
             </LinearLayout>
 
         </LinearLayout>
+
     </ScrollView>
+
+    <TextView
+        android:id="@+id/empty_view"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_internet_connection"
+        android:textAppearance="?android:textAppearanceMedium"/>
 </LinearLayout>
 
 

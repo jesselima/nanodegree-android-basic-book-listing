@@ -10,13 +10,9 @@
     <!-- Accent color of the app -->
     <color name="colorAccent">#10CAC9</color>
 
-    <!-- Accent color of the app -->
     <color name="colorTextDarkGrey">#464646</color>
-
-    <!-- Accent color of the app -->
     <color name="colorTextAlert">#fa7474</color>
-
-    <!-- Accent color of the app -->
     <color name="transparent">#00ffffff</color>
+    <color name="textWhite">#ffffff</color>
 
 </resources>

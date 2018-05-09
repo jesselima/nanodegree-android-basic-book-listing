@@ -12,23 +12,34 @@
         android:roundIcon="@drawable/udacity"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashScreenActivity">
+
+        <activity android:name=".SplashScreenActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".BookListActivity" />
-        <activity android:name=".SettingsActivity">
+
+        <activity
+            android:name=".BookListActivity"
+            android:configChanges="orientation|screenSize">
             <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.udacity.booklisting.BookListActivity" />
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
         </activity>
-        <activity android:name=".BooksDetailsActivity"
+
+        <activity
+            android:name=".BooksDetailsActivity"
+            android:configChanges="orientation|screenSize"
             android:label="Book Details"
             android:parentActivityName=".BookListActivity"/>
+        <activity android:name=".MainActivity" />
+
     </application>
 
 </manifest>

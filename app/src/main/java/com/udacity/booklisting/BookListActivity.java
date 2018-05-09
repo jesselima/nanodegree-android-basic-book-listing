@@ -2,6 +2,7 @@ package com.udacity.booklisting;
 
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
@@ -10,9 +11,11 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
+// import android.support.v7.widget.SearchView;
+import android.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -28,37 +31,41 @@ import java.util.List;
 public class BookListActivity extends AppCompatActivity
         implements LoaderCallbacks<List<Book>> {
 
-    //private String searchTerms = "node,android";
-    private String searchTerms = "ios, android, javascript";
+    private String searchTerms = "";
     private static final String LOG_TAG = BookListActivity.class.getName();
-    //private static final String REQUEST_URL = "https://www.googleapis.com/books/v1/volumes";
     private static final String REQUEST_URL = "https://www.googleapis.com/books/v1/volumes";
     private static final int BOOK_LOADER_ID = 1;
     private BookAdapter booksAdapter;
-    private TextView mEmptyStateTextView;
+    private TextView mEmptyStateTextView, textViewNoResultsFound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.book_list_activity);
+        setContentView(R.layout.activity_book_list);
 
-        SearchView searchView = findViewById(R.id.search_view_book_list);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                // Updates the search term from the search input.
-                searchTerms = query;
-                // Restart the loader using the new term
-                restartLoaderBooks();
+        //**
+        handleIntent(getIntent());
+        //**
 
-                return false;
-            }
+        textViewNoResultsFound = findViewById(R.id.no_books_found_text);
 
-            @Override
-            public boolean onQueryTextChange(final String newText) {
-                return false;
-            }
-        });
+//        SearchView searchView = findViewById(R.id.search_view_book_list);
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                // Update the search terms from the search input.
+//                searchTerms = query;
+//                // Restart the loader using the new term
+//                restartLoaderBooks();
+//
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(final String newText) {
+//                return false;
+//            }
+//        });
 
         ListView bookListView = findViewById(R.id.list);
 
@@ -73,7 +80,6 @@ public class BookListActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
             Book book = booksAdapter.getItem(position);
                 String id = book.getId();
-
             Intent intent = new Intent(getApplicationContext(), BooksDetailsActivity.class);
             intent.putExtra("id", id);
             startActivity(intent);
@@ -92,9 +98,7 @@ public class BookListActivity extends AppCompatActivity
             loadingIndicator.setVisibility(View.GONE);
             mEmptyStateTextView.setText(R.string.no_internet_connection);
         }
-
     }
-
 
     public void restartLoaderBooks(){
         // Clear the ListView as a new query will be kicked off
@@ -111,6 +115,8 @@ public class BookListActivity extends AppCompatActivity
     @Override
     public Loader<List<Book>> onCreateLoader(int i, Bundle bundle) {
 
+        searchTerms = "ios, android, javascript";
+
         Uri baseUri = Uri.parse(REQUEST_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
@@ -120,7 +126,7 @@ public class BookListActivity extends AppCompatActivity
         uriBuilder.appendQueryParameter("maxResults", "40");
         uriBuilder.appendQueryParameter("orderBy", "relevance");
 
-        Log.v("Requested URL", uriBuilder.toString());
+        Log.v("Requested URL: ", uriBuilder.toString());
 
         return new BookLoader(this, uriBuilder.toString());
     }
@@ -134,14 +140,13 @@ public class BookListActivity extends AppCompatActivity
         // Set empty state text to display "No books found."
         mEmptyStateTextView.setText(R.string.no_books);
 
-        // Clear the adapter of previous earthquake data
-        //mAdapter.clear();
-        
         // If there is a valid list of {@link Book}s, then add them to the adapter's
         // data set. This will trigger the ListView to update.
         if (books != null && !books.isEmpty()) {
+            textViewNoResultsFound.setVisibility(View.GONE);
             booksAdapter.addAll(books);
-//            updateUi(books);
+        }else{
+            textViewNoResultsFound.setVisibility(View.VISIBLE);
         }
     }
 
@@ -151,10 +156,41 @@ public class BookListActivity extends AppCompatActivity
         booksAdapter.clear();
     }
 
+
+    // *** NEW SEARCH
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options_menu, menu);
+
+        //associate the searchable configuration with the SearchView by calling setSearchableInfo(SearchableInfo)
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
         return true;
     }
+
+    //**
+    @Override
+    protected void onNewIntent(Intent intent) {
+
+        handleIntent(intent);
+    }
+    private void handleIntent(Intent intent) {
+
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            Log.v("Test new search: ", query);
+            //***************
+            //***************
+            //** use the query to search your data somehow
+            //***************
+            //***************
+        }
+    }
+    //**
 
 }
