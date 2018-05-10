@@ -10,15 +10,17 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-// import android.support.v7.widget.SearchView;
-import android.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.udacity.booklisting.adapters.BookAdapter;
@@ -28,10 +30,12 @@ import com.udacity.booklisting.models.Book;
 import java.util.ArrayList;
 import java.util.List;
 
+// import android.support.v7.widget.SearchView;
+
 public class BookListActivity extends AppCompatActivity
         implements LoaderCallbacks<List<Book>> {
 
-    private String searchTerms = "";
+    private String searchTerms = "ios, android, javascript";
     private static final String LOG_TAG = BookListActivity.class.getName();
     private static final String REQUEST_URL = "https://www.googleapis.com/books/v1/volumes";
     private static final int BOOK_LOADER_ID = 1;
@@ -43,29 +47,11 @@ public class BookListActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_list);
 
-        //**
+        //** Get the search input and update search term
         handleIntent(getIntent());
         //**
 
         textViewNoResultsFound = findViewById(R.id.no_books_found_text);
-
-//        SearchView searchView = findViewById(R.id.search_view_book_list);
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                // Update the search terms from the search input.
-//                searchTerms = query;
-//                // Restart the loader using the new term
-//                restartLoaderBooks();
-//
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(final String newText) {
-//                return false;
-//            }
-//        });
 
         ListView bookListView = findViewById(R.id.list);
 
@@ -98,6 +84,26 @@ public class BookListActivity extends AppCompatActivity
             loadingIndicator.setVisibility(View.GONE);
             mEmptyStateTextView.setText(R.string.no_internet_connection);
         }
+
+
+        final FloatingActionButton fab = findViewById(R.id.fab);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+
+                fab.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        restartLoaderBooks();
+                        fab.setVisibility(View.VISIBLE);
+                        Snackbar.make(view, "List refreshed!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                    }
+                });
+
+            }
+        }, 1000);
     }
 
     public void restartLoaderBooks(){
@@ -114,8 +120,6 @@ public class BookListActivity extends AppCompatActivity
 
     @Override
     public Loader<List<Book>> onCreateLoader(int i, Bundle bundle) {
-
-        searchTerms = "ios, android, javascript";
 
         Uri baseUri = Uri.parse(REQUEST_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
@@ -179,6 +183,7 @@ public class BookListActivity extends AppCompatActivity
 
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
+            searchTerms = query;
             Log.v("Search term: ", query);
         }
     }
