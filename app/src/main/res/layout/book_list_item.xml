@@ -27,7 +27,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -43,7 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="2"
-                    android:text="Authors: "
+                    android:text="@string/authors"
                     android:textSize="14sp"
                     android:textStyle="bold"/>
                 <TextView
@@ -63,7 +64,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="2"
-                    android:text="Pages: "
+                    android:text="@string/pages"
                     android:textSize="14sp"
                     android:textStyle="bold"/>
                 <TextView
@@ -84,7 +85,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:maxLines="2"
-                    android:text="Average Rating: "
+                    android:text="@string/average_rating"
                     android:textSize="14sp"
                     android:textStyle="bold"/>
                 <RatingBar
@@ -104,7 +105,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:gravity="right"
+            android:gravity="end"
             android:orientation="vertical">
             <TextView
                 android:id="@+id/text_view_currency_code"

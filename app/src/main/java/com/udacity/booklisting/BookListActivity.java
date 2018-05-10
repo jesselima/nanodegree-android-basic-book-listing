@@ -10,7 +10,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -85,25 +84,14 @@ public class BookListActivity extends AppCompatActivity
             mEmptyStateTextView.setText(R.string.no_internet_connection);
         }
 
-
-        final FloatingActionButton fab = findViewById(R.id.fab);
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-
-
-                fab.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        restartLoaderBooks();
-                        fab.setVisibility(View.VISIBLE);
-                        Snackbar.make(view, "List refreshed!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                    }
-                });
-
+            public void onClick(View view) {
+                restartLoaderBooks();
+                Snackbar.make(view, "List reloaded!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
-        }, 1000);
+        });
     }
 
     public void restartLoaderBooks(){
