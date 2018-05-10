@@ -173,6 +173,8 @@ public final class QueryBookUtils {
                 String description = "";
                 if (volumeInfo.has("description")){
                     description = volumeInfo.getString("description");
+                    // Removes HTML tags from the description string.
+                    description = description.replaceAll("<.*?>", "");
                 }
 
                 String buyLink = "";
