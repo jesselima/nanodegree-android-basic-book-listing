@@ -101,15 +101,19 @@
 
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="@color/colorAccent"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="@color/colorAccent"/>
+                android:orientation="vertical"
+                android:padding="@dimen/margin_8"
+                android:background="@color/colorBgLightGrey">
 
                 <LinearLayout
                     style="@style/LinearLayoutDetailsLine">
@@ -169,10 +173,13 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    style="@style/LinearLayoutDetailsLine">
+                    style="@style/LinearLayoutDetailsLine"
+                    android:orientation="vertical">
                     <TextView
                         style="@style/textLabel"
                         android:layout_gravity="start"
+                        android:layout_marginBottom="@dimen/margin_4"
+                        android:layout_marginTop="@dimen/margin_8"
                         android:text="@string/description"/>
                     <TextView
                         android:id="@+id/text_view_description"

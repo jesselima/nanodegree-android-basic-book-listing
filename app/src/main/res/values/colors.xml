@@ -11,6 +11,7 @@
     <color name="colorAccent">#10CAC9</color>
 
     <color name="colorTextDarkGrey">#464646</color>
+    <color name="colorBgLightGrey">#e7e7e7</color>
     <color name="colorTextAlert">#fa7474</color>
     <color name="transparent">#00ffffff</color>
     <color name="textWhite">#ffffff</color>

@@ -18,18 +18,30 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 
-
+/**
+ *
+ */
 public final class QueryBookUtils {
 
     private static final String LOG_TAG = QueryUtils.class.getSimpleName();
 
+    /**
+     * Creates a empty constructor of of this current class, QueryBookUtils.
+     */
     private QueryBookUtils() {
     }
 
+    /**
+     * Query the Google Books API data and return details of a {@link Book} object.
+     * @param requestUrl is the URL request to the API.
+     * @return {@link Book} object..
+     */
     public static Book fetchBookData(String requestUrl) {
 
+        // Create URL object
         URL url = createUrl(requestUrl);
 
+        // Perform HTTP request to the URL and receive a JSON response back
         String jsonResponse = null;
         try {
             jsonResponse = makeHttpRequest(url);
@@ -37,11 +49,17 @@ public final class QueryBookUtils {
             Log.e(LOG_TAG, "Ops! Problem making the HTTP request.", e);
         }
 
+        // Extract relevant fields from the JSON response and create a {@link Book} object.
         Book book = extractFeatureFromJson(jsonResponse);
 
         return book;
     }
 
+    /**
+     * Returns new URL object from the given string URL.
+     * @param stringUrl is the String URl for the request
+     * @return a URL object
+     */
     private static URL createUrl(String stringUrl) {
         URL url = null;
         try {
@@ -52,9 +70,17 @@ public final class QueryBookUtils {
         return url;
     }
 
+    /**
+     * Make an HTTP request to the given URL and return a String as the response.
+     * @param url is the given URL object
+     * @return a json in a String data type
+     * @throws IOException if there is a problem during the request throw a error at the log.
+     */
     private static String makeHttpRequest(URL url) throws IOException {
+
         String jsonResponse = "";
 
+        // If the URL is null, do not make the request.
         if (url == null) {
             return jsonResponse;
         }
@@ -84,15 +110,19 @@ public final class QueryBookUtils {
             }
             if (inputStream != null) {
                 // Closing the input stream could throw an IOException, which is why
-                // the makeHttpRequest(URL url) method signature specifies than an IOException
-                // could be thrown.
+                // the makeHttpRequest(URL url) method signature specifies than an IOException could be thrown.
                 inputStream.close();
             }
         }
         return jsonResponse;
     }
 
-
+    /**
+     * Convert the {@link InputStream} into a String which contains the whole JSON response from the server.
+     * @param inputStream receives data from response.
+     * @return a String with the JSON data inside it.
+     * @throws IOException if the read data goes wrong throws a IOException.
+     */
     private static String readFromStream(InputStream inputStream) throws IOException {
         StringBuilder output = new StringBuilder();
         if (inputStream != null) {
@@ -107,6 +137,10 @@ public final class QueryBookUtils {
         return output.toString();
     }
 
+    /**
+     * Return the details of a {@link Book} object that has been built up from
+     * parsing the given JSON response.
+     */
     private static Book extractFeatureFromJson(String bookJSON) {
 
         if (TextUtils.isEmpty(bookJSON)) {

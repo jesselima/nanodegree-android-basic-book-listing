@@ -24,6 +24,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.udacity.booklisting.loaders.BookDetailsLoader;
+import com.udacity.booklisting.loaders.BookLoader;
 import com.udacity.booklisting.models.Book;
 
 import java.io.InputStream;
@@ -73,6 +74,18 @@ public class BooksDetailsActivity extends AppCompatActivity implements LoaderCal
 
     }
 
+    /**
+     * This method get the REQUEST_URL ("https://www.googleapis.com/books/v1/volumes") and
+     * parse this REQUEST_URL + the Book ID to a Uri object. Then uses the Uri.Builder to create the query over the
+     * REQUEST_URL. The final result is a Uri.Builder that is converted to String and added to
+     * a new BookDetailsLoader object. This BookDetailsLoader object instantiate a new Book object.
+     * Then the this Book will receive the result of QueryUtils.fetchBookData(mUrl) that in its turn
+     * will make the request under the loadInBackground method in the BookDetailsLoader;
+     * @param i is the ID whose loader is to be created.
+     * @param bundle is any arguments supplied by the caller.
+     * @return a new {@link BookDetailsLoader} object. This object receives the full
+     * Url (including its query parameters)
+     */
     @Override
     public Loader<Book> onCreateLoader(int i, Bundle bundle) {
 
@@ -83,32 +96,44 @@ public class BooksDetailsActivity extends AppCompatActivity implements LoaderCal
 
         uriBuilder.appendQueryParameter("projection", "full");
 
-        // TODO: Test
+        // Test: Output the Requested URL
         Log.v("Requested URL", uriBuilder.toString());
 
         return new BookDetailsLoader(this, uriBuilder.toString());
     }
 
+    /**
+     * Take action when the loader finishes its task. Hide the loading indicator and add
+     * the Book data {@link Book} object.
+     * I the Book object has data then call the update UI method.
+     * @param loader is the {@link BookDetailsLoader} object.
+     * @param book is the book object with data. It
+     */
     @Override
     public void onLoadFinished(Loader<Book> loader, Book book) {
         // Hide loading indicator because the data has been loaded
         ProgressBar loadingIndicator = findViewById(R.id.loading_indicator);
         loadingIndicator.setVisibility(View.GONE);
 
-        // Set empty state text to display "No books found."
-//        mEmptyStateTextView.setText(R.string.no_books);
-
         if (book != null) {
            updateUi(book);
         }
     }
 
+    /**
+     * Clear the Book object data and creates another new Book object.
+     * @param loader is the loader object that call the BookLoaderDetails
+     */
     @Override
     public void onLoaderReset(Loader<Book> loader) {
         // Loader reset, so we can clear out our existing data.
         Book book = new Book();
     }
 
+    /**
+     * Update the UI with tha book data.
+     * @param book is the book object with book details data.
+     */
     public void updateUi(final Book book){
 
         TextView title = findViewById(R.id.text_view_title);
@@ -184,6 +209,10 @@ public class BooksDetailsActivity extends AppCompatActivity implements LoaderCal
 
     }
 
+    /**
+     * Download the book cover image data in a AsyncTask
+     * When the Download is finished update the UI with the image.
+     */
     class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 
         private ImageView imageViewBook;
@@ -210,6 +239,10 @@ public class BooksDetailsActivity extends AppCompatActivity implements LoaderCal
         }
     }
 
+    /**
+     * When call update the Book cover image on the UI. It's called after the AsyncTask DownloadImageTask is completed.
+     * @param result
+     */
     private void updateBookImage(Bitmap result) {
         ProgressBar progressBar = findViewById(R.id.loading_image_book_indicator);
         ImageView imageBook = findViewById(R.id.image_view_book);
@@ -218,11 +251,21 @@ public class BooksDetailsActivity extends AppCompatActivity implements LoaderCal
         imageBook.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * This method receives the price (data type double) as input parameter and convert to string in the given pattern.
+     * @param price is the price of the book
+     * @return a string with the price formatted according to the DecimalFormat method pattern.
+     */
     private String formatPrice(double price) {
         NumberFormat formatter = new DecimalFormat("#0.00");
         return formatter.format(price);
     }
 
+    /**
+     * This method receives the date (data type Date) as input parameter and
+     * @param dateObject is the date to be formatted.
+     * @return a string with the date formatted according to the SimpleDateFormat method pattern.
+     */
     private String formatDate(Date dateObject) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("LLL dd, yyyy");
         return dateFormat.format(dateObject);

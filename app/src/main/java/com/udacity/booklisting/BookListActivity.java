@@ -94,6 +94,9 @@ public class BookListActivity extends AppCompatActivity
         });
     }
 
+    /**
+     * Restart the loader.
+     */
     public void restartLoaderBooks(){
         // Clear the ListView as a new query will be kicked off
         booksAdapter.clear();
@@ -106,6 +109,18 @@ public class BookListActivity extends AppCompatActivity
         getLoaderManager().restartLoader(BOOK_LOADER_ID, null, this);
     }
 
+    /**
+     * This method get the REQUEST_URL ("https://www.googleapis.com/books/v1/volumes") and
+     * parse this REQUEST_URL to a Uri object. Then uses the Uri.Builder to create the query over the
+     * REQUEST_URL. The final result is a Uri.Builder that is converted to String and added to
+     * a new BookLoader object. This BookLoader object instantiate a new List<Book> object.
+     * Then the this List<Book> will receive the result of QueryUtils.fetchBookData(mUrl) that in its turn
+     * will make the request under the loadInBackground method in the BookLoader;
+     * @param i is the ID whose loader is to be created.
+     * @param bundle is any arguments supplied by the caller.
+     * @return a new {@link BookLoader} object. This object receives the full
+     * Url (including its query parameters)
+     */
     @Override
     public Loader<List<Book>> onCreateLoader(int i, Bundle bundle) {
 
@@ -123,6 +138,13 @@ public class BookListActivity extends AppCompatActivity
         return new BookLoader(this, uriBuilder.toString());
     }
 
+    /**
+     * Take action when the loader finishes its task. Hide the loading indicator and add
+     * the list of books do the {@link BookAdapter} object. But is the list of books is empty
+     * show a text message in the UI.
+     * @param loader is the {@link BookLoader} object
+     * @param books is the list od books.
+     */
     @Override
     public void onLoadFinished(Loader<List<Book>> loader, List<Book> books) {
         // Hide loading indicator because the data has been loaded
@@ -142,13 +164,17 @@ public class BookListActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * When the loader is reset, its clear the adapter for a better performance.
+     * @param loader is the loader of the list of books
+     */
     @Override
     public void onLoaderReset(Loader<List<Book>> loader) {
         // Loader reset, so we can clear out our existing data.
         booksAdapter.clear();
     }
 
-    // Search from Action Bar
+    // Inflates the search box in the action bar.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -162,13 +188,22 @@ public class BookListActivity extends AppCompatActivity
 
         return true;
     }
+
+    /**
+     * This method is call the handleIntent method every time the user type a Term in the search box on the action bar.
+     * @param intent Intent object that gets the
+     */
     @Override
     protected void onNewIntent(Intent intent) {
-
         handleIntent(intent);
     }
-    private void handleIntent(Intent intent) {
 
+    /**
+     * When this method is call, it receives a Intent object as argument. This object handles the
+     * user text input and updates the searchTerms variable fetching books according to the
+     * @param intent is the Intent object that takes the user input term.
+     */
+    private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             searchTerms = query;
@@ -183,9 +218,4 @@ public class BookListActivity extends AppCompatActivity
         restartLoaderBooks();
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        restartLoaderBooks();
-    }
 }

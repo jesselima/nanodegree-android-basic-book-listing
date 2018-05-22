@@ -12,6 +12,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
+        // Load the SplashScreenActivity for 2 seconds and starts BookListActivity.
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -21,6 +22,9 @@ public class SplashScreenActivity extends AppCompatActivity {
         }, 2000);
     }
 
+    /**
+     * When this method is called it start BookListActivity
+     */
     private void goToWelcomeActivity(){
         Intent intent = new Intent(this, BookListActivity.class);
         startActivity(intent);

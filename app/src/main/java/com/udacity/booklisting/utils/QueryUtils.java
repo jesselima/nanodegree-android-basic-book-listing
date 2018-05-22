@@ -20,18 +20,33 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * This class offers Helper methods related to requesting and receiving a list of book data from Google Play Books.
+ */
 public final class QueryUtils {
 
+    /** Tag for the log messages output */
     private static final String LOG_TAG = QueryUtils.class.getSimpleName();
 
+    /**
+     * Create a private constructor because no one should ever create a {@link QueryUtils} object.
+     * This class is only meant to hold static variables and methods, which can be accessed
+     * directly from the class name QueryUtils (and an object instance of QueryUtils is not needed).
+     */
     private QueryUtils() {
     }
 
+    /**
+     * Query the Google Books API data and return a list of {@link Book}s objects.
+     * @param requestUrl is the URL request to the API.
+     * @return a list of Books.
+     */
     public static List<Book> fetchBookData(String requestUrl) {
 
+        // Create URL object
         URL url = createUrl(requestUrl);
 
+        // Perform HTTP request to the URL and receive a JSON response back
         String jsonResponse = null;
         try {
             jsonResponse = makeHttpRequest(url);
@@ -39,11 +54,18 @@ public final class QueryUtils {
             Log.e(LOG_TAG, "Ops! Problem making the HTTP request.", e);
         }
 
+        // Extract relevant fields from the JSON response and create a list of {@link Book}s
         List<Book> books = extractFeatureFromJson(jsonResponse);
 
+        // Return the list of {@link Book}s
         return books;
     }
 
+    /**
+     * Returns new URL object from the given string URL.
+     * @param stringUrl is the String URl for the request
+     * @return a URL object
+     */
     private static URL createUrl(String stringUrl) {
         URL url = null;
         try {
@@ -54,9 +76,17 @@ public final class QueryUtils {
         return url;
     }
 
+    /**
+     * Make an HTTP request to the given URL and return a String as the response.
+     * @param url is the given URL object
+     * @return a json in a String data type
+     * @throws IOException if there is a problem during the request throw a error at the log.
+     */
     private static String makeHttpRequest(URL url) throws IOException {
+
         String jsonResponse = "";
 
+        // If the URL is null, do not make the request.
         if (url == null) {
             return jsonResponse;
         }
@@ -94,6 +124,12 @@ public final class QueryUtils {
         return jsonResponse;
     }
 
+    /**
+     * Convert the {@link InputStream} into a String which contains the whole JSON response from the server.
+     * @param inputStream
+     * @return a String with the JSON data inside it.
+     * @throws IOException
+     */
     private static String readFromStream(InputStream inputStream) throws IOException {
         StringBuilder output = new StringBuilder();
         if (inputStream != null) {
@@ -108,23 +144,30 @@ public final class QueryUtils {
         return output.toString();
     }
 
+    /**
+     * Return a list of {@link Book}s objects that has been built up from
+     * parsing the given JSON response.
+     */
     private static List<Book> extractFeatureFromJson(String bookJSON) {
-
+        // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(bookJSON)) {
             return null;
         }
-
+        // Create an empty ArrayList that we can start adding Books.
         List<Book> books = new ArrayList<>();
 
         try {
-
             // Create a JSONObject from the JSON response string
             JSONObject rootJsonResponseObject = new JSONObject(bookJSON);
+            // Create a JSONArray and put the array of Books (items) inside it.
             JSONArray bookArray = rootJsonResponseObject.getJSONArray("items");
 
+            // For each position in the bookArray (JSONArray object)
+            // extract the JSON data from such position in the array
             for (int i = 0; i < bookArray.length(); i++) {
 
                 // Get a single book object in the bookArray (in within the list of books)
+
                 JSONObject currentBook = bookArray.getJSONObject(i);
 
                 String id = currentBook.getString("id");
@@ -137,7 +180,6 @@ public final class QueryUtils {
                     pages = volumeInfo.getInt("pageCount");
                 }
 
-                // Verifies if authors array exists inside volumeInfo JSONObject object
                 JSONArray authorsArray = null;
                 if (volumeInfo.has("authors")){
                       authorsArray = volumeInfo.getJSONArray("authors");
@@ -165,6 +207,7 @@ public final class QueryUtils {
                     rating  = volumeInfo.getInt("averageRating");
                 }
 
+                // Create a Book object the receives the JSON data as inputs parameters.
                 Book book = new Book(id, title, authors, pages, rating, price, currencyCode);
                 books.add(book);
             }
