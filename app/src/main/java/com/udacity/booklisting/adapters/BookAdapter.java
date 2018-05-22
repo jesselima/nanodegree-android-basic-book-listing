@@ -59,23 +59,22 @@ public class BookAdapter extends ArrayAdapter<Book> {
         TextView mCurrency = listItemView.findViewById(R.id.text_view_currency_code);
 
         String currency = currentBook.getCurrencyCode();
+        String price = formatPrice(currentBook.getListPrice());
         double listPrice = currentBook.getListPrice();
-
         if(listPrice == 0){
             mPrice.setText(R.string.free);
             mPrice.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
             mCurrency.setVisibility(View.GONE);
         }else {
-            mPrice.setText(String.valueOf(formatPrice(listPrice)));
+            mPrice.setText(price);
             mCurrency.setText(String.valueOf(currency));
         }
-
         // Return the list item view that is now showing the appropriate data
         return listItemView;
     }
 
     private String formatPrice(double price) {
-        NumberFormat formatter = new DecimalFormat("#0,00");
+        NumberFormat formatter = new DecimalFormat("#0.00");
         return formatter.format(price);
     }
 

@@ -40,6 +40,7 @@ public class BookListActivity extends AppCompatActivity
     private static final int BOOK_LOADER_ID = 1;
     private BookAdapter booksAdapter;
     private TextView mEmptyStateTextView, textViewNoResultsFound;
+    private static String lastSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,6 @@ public class BookListActivity extends AppCompatActivity
 
         //** Get the search input and update search term
         handleIntent(getIntent());
-        //**
 
         textViewNoResultsFound = findViewById(R.id.no_books_found_text);
 
@@ -172,8 +172,20 @@ public class BookListActivity extends AppCompatActivity
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             searchTerms = query;
+            lastSearch = query;
             Log.v("Search term: ", query);
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        restartLoaderBooks();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        restartLoaderBooks();
+    }
 }
